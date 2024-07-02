@@ -1,12 +1,5 @@
 'use strict';
 
-/////////////////////////////////////////////////
-/////////////////////////////////////////////////
-// BANKIST APP
-
-/////////////////////////////////////////////////
-// Data
-
 // DIFFERENT DATA! Contains movement dates, currency and locale
 
 const account1 = {
@@ -227,31 +220,6 @@ const updateUI = function (acc) {
   timer = setTimerOut();
 };
 
-// using api date //
-
-// const option1 = {
-//   weekday: 'long',
-//   year: 'numeric',
-//   month: 'numeric',
-//   day: 'numeric',
-//   hour: 'numeric',
-//   minute: 'numeric',
-//   // second: 'numeric',
-// };
-
-// const option2 = {
-//   dateStyle: 'full',
-//   timeStyle: 'long',
-//   timeZone: 'israel',
-// };
-
-// const local = navigator.language;
-// console.log(local);
-
-// const now = new Date();
-// const dateFor = new Intl.DateTimeFormat(local, option1).format(now);
-// labelDate.textContent = dateFor;
-
 const setTimerOut = function () {
   const tick = function () {
     // set the time and secondes
@@ -271,22 +239,17 @@ const setTimerOut = function () {
     time--;
   };
   // set time out
-  let time = 10;
+  let time = 120;
 
   tick();
   const timer = setInterval(tick, 1000);
   return timer;
 };
-// return timer
-// fake entering //
-// currentAccount = account3;
-// containerApp.style.opacity = 1;
-// updateUI(currentAccount);
 
-// Event handlers
+// Event handlers //
 let currentAccount, timer;
-// login to the account //
 ///////////////////////////////////////
+// login to the account //
 btnLogin.addEventListener('click', function (e) {
   // Prevent form from submitting
   e.preventDefault();
@@ -329,8 +292,8 @@ btnLogin.addEventListener('click', function (e) {
   }
 });
 
-// transfer mony to other account //
 /////////////////////////////////////////////////
+// transfer mony to other account //
 btnTransfer.addEventListener('click', function (e) {
   e.preventDefault();
   const amount = Math.floor(inputTransferAmount.value);
@@ -358,8 +321,8 @@ btnTransfer.addEventListener('click', function (e) {
   }
 });
 
-// taking a loan from the bank //
 /////////////////////////////////////////////////
+// taking a loan from the bank //
 btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
 
@@ -378,8 +341,8 @@ btnLoan.addEventListener('click', function (e) {
   inputLoanAmount.value = '';
 });
 
-// closing the account and delete it //
 /////////////////////////////////////////////////
+// closing the account and delete it //
 btnClose.addEventListener('click', function (e) {
   e.preventDefault();
 
@@ -403,183 +366,11 @@ btnClose.addEventListener('click', function (e) {
   inputCloseUsername.value = inputClosePin.value = '';
 });
 
-// re-ordering the movements in the UI //
 /////////////////////////////////////////////////
+// re-ordering the movements in the UI //
 let sorted = false;
 btnSort.addEventListener('click', function (e) {
   e.preventDefault();
   displayMovements(currentAccount, !sorted);
   sorted = !sorted;
 });
-
-/////////////////////////////////////////////////
-/////////////////////////////////////////////////
-// LECTURES
-
-/*
-const clock = () => {
-  const theFunc = () => {
-    const currentTime = new Date();
-
-    const hour = currentTime.getHours();
-    const min = currentTime.getMinutes();
-    const seco = currentTime.getSeconds();
-
-    console.log(`${hour}:${min}:${seco}`);
-    // console.log(typeof sec);
-  };
-  setInterval(theFunc, 1000);
-  // location.reload();
-};
-
-// clock();
-
-let time = 10;
-const timer = setInterval(() => {
-  // set time countdown
-
-  const minute = `${Math.trunc(time / 60)}`.padStart(2, 0);
-  const seconde = `${time % 60}`.padStart(2, 0);
-
-  //decrease by one
-  time--;
-
-  // display the timer
-  const displayTimer = `${minute}:${seconde}`;
-
-  // stop timer if fet to 0
-  if (time === 0) clearInterval(timer);
-
-  console.log(displayTimer);
-}, 1000);
-
-const word = ['what'];
-
-const timer = setTimeout(() => {
-  console.log('what');
-}, 3000);
-
-if (word.includes('what')) clearTimeout(timer);
-
-setInterval(() => {
-  const now = new Date();
-  const option = {
-    // year: 'numeric',
-    // month: 'numeric',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-    seconde: 'numeric',
-  };
-
-  console.log(new Intl.DateTimeFormat().format(now));
-}, 1000);
-
-const USnumber = 12453.34;
-
-console.log(
-  new Intl.NumberFormat(currentAccount.locale, {
-    style: 'currency',
-    currency: currentAccount.currency,
-  }).format(USnumber)
-);
-
-console.log(
-  new Intl.NumberFormat('en-IN', {
-    style: 'currency',
-    currency: 'ILS',
-    maximumSignificantDigits: 3,
-  }).format(USnumber)
-);
-
-const future = new Date(2025, 4, 1, 12, 30);
-console.log(+future);
-
-const calcTimePast = (day1, day2) =>
-  Math.abs(day1 - day2) / (1000 * 60 * 60 * 24);
-
-const day1 = calcTimePast(new Date(2025, 4, 1), new Date(2025, 4, 10));
-
-console.log(day1);
-
-const now = new Date(); // .getTime();
-console.log(now);
-console.log(new Date('may 01 2002 10:03:22'));
-
-console.log(new Date(account1.movementsDates[0]));
-console.log(new Date(2024, 11, 13, 10, 20, 3));
-
-console.log(new Date(24 * 60 * 60 * 1000));
-
-const future = new Date(2024, 11, 1, 10, 20);
-console.log(future);
-console.log(future.getFullYear());
-console.log(future.getMonth());
-console.log(future.getDate());
-console.log(future.getDay());
-console.log(future.getHours());
-console.log(future.getMinutes());
-console.log(future.getSeconds());
-console.log(future.getMilliseconds());
-console.log(future.toISOString());
-console.log(future.getTime());
-
-console.log(new Date(future.getTime()));
-console.log(Date.now());
-
-future.setFullYear(2040);
-future.setMonth(4);
-console.log(future);
-
-// console.log(new Date(now));
-
-
-
-console.log(Number.parseInt('20.3ksS', 10));
-console.log(Number.parseInt('e20', 10));
-
-console.log(Number.parseFloat('2.3er'));
-
-console.log(Number.isNaN('2.3er'));
-console.log(Number.isNaN(+'23f'));
-console.log(Number.isNaN(20 / 0));
-
-console.log(Number.isFinite(20));
-console.log(Number.isFinite('20'));
-console.log(Number.isFinite(+'20'));
-console.log(Number.isFinite('20ef'));
-console.log(Number.isFinite(20 / 0));
-
-
-// console.log(Math.sqrt(25));
-// console.log(Math.sqrt(8));
-// console.log(8 ** (1 / 3));
-
-const randomInt = (min, max) =>
-  Math.floor(Math.random() * (max - min) + 1) + min;
-
-// console.log(randomInt(10, 20));
-
-// delete the after point //
-console.log(Math.trunc(23.3));
-console.log(Math.trunc(23.9));
-
-// round the number to the nearest integer //
-console.log(Math.round(23.3));
-console.log(Math.round(23.9));
-
-// round the number up //
-console.log(Math.ceil(23.3));
-console.log(Math.ceil(23.9));
-
-// round the number down //
-console.log(Math.floor(23.3));
-console.log(Math.floor(23.9));
-
-// rounding decimals //
-console.log((2.3).toFixed(0));
-console.log((2.3).toFixed(2));
-console.log(+(2.334).toFixed(4));
-console.log((2.334).toFixed(4));
-console.log(+(+'2.5').toFixed(0));
-*/
